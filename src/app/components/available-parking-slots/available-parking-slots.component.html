@@ -1,0 +1,37 @@
+<!-- available-parking-slots.component.html -->
+<div class="container mt-4">
+  <h2 style="color: white;">Available Parking Slots</h2>
+
+  <!-- Display Current Date and Time -->
+  <div>
+    <p style="color: white;">Current Date and Time: {{ currentDate | date: 'medium' }}</p>
+  </div>
+
+  <!-- Responsive Table for Available Parking Slots -->
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Parking Slot Number</th>
+          <th>Validity Start Date and Time</th>
+          <th>Validity End Date and Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let slot of availableParkingSlots">
+          <td>{{ slot.slotNumber }}</td>
+          <td>{{ slot.leaveStartDate | date: 'medium' }}</td>
+          <td>{{ slot.leaveEndDate | date: 'medium' }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="bookParkingSlot(slot.slotNumber)">Book</button>
+          </td>
+        </tr>
+        <!-- Add more rows as needed -->
+        <tr *ngIf="availableParkingSlots.length === 0">
+          <td colspan="4">No available parking slots</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

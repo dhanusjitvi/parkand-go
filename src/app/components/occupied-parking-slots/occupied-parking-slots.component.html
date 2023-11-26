@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <h2 style="color: white;">Occupied-Parking-Slots</h2>
+
+  <div *ngIf="occupiedParkingSlots.length > 0" class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th style="color: white;">Parking Slot Number</th>
+          <th style="color: white;">Name</th>
+          <th style="color: white;">Contact Number</th>
+          <th style="color: white;">Validity Date</th>
+          <th style="color: white;">Leave Status</th>
+          <th style="color: white;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let slot of occupiedParkingSlots">
+          <td>{{ slot.slotNumber }}</td>
+          <td>{{ slot.userId.name }}</td>
+          <td>{{ slot.userId.number }}</td>
+          <td>{{ slot.endDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ slot.leave ? 'In Leave' : 'Not In Leave' }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="leaveParkingSlot(slot.slotNumber)">Leave</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="occupiedParkingSlots.length === 0" style="color: white;">
+    No occupied parking slots available.
+  </div>
+
+  <!-- Leave Modal -->
+  <!-- Inside the Leave Modal -->
+<div *ngIf="isLeaveModalOpen">
+  <div class="modal-header">
+    <h5 class="modal-title" style="color: white;">Leave Parking Slot</h5>
+    <button type="button" class="close" aria-label="Close" (click)="closeLeaveModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- Leave Form -->
+    <form [formGroup]="leaveForm">
+      <div class="form-group">
+        <label for="startDate" style="color: white;">Start Date</label>
+        <input type="date" class="form-control" id="startDate" formControlName="startDate">
+        <label for="startTime" style="color: white;">Start Time</label>
+        <input type="time" class="form-control" id="startTime" formControlName="startTime">
+      </div>
+      <div class="form-group">
+        <label for="endDate" style="color: white;">End Date</label>
+        <input type="date" class="form-control" id="endDate" formControlName="endDate">
+        <label for="endTime" style="color: white;">End Time</label>
+        <input type="time" class="form-control" id="endTime" formControlName="endTime">
+      </div>
+      <!-- Add more form controls as needed -->
+
+      <button type="button" class="btn btn-primary" (click)="submitLeaveForm()">Submit</button>
+    </form>
+  </div>
+</div>
+
+</div>

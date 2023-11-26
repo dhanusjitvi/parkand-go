@@ -1,0 +1,43 @@
+<div class="main">
+  <nav
+    class="navbar navbar-expand-lg navbar-light"
+    style="background-color: #212529"
+  >
+    <div class="container">
+      <!-- Centered and Bold Text -->
+      <a class="navbar-brand mx-auto font-weight-bold text-white" href="#"
+        >Park And Go</a
+      >
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col position-relative">
+        <img
+          src="../../../assets/ps4.jpg"
+          alt="Banner Image"
+          class="img-fluid"
+          class="full-width-image"
+          style="height: 650px; width: 100%"
+        />
+
+        <div
+          [@fadeInOut]
+          class="banner-text-container position-absolute top-50 start-50 translate-middle text-center text-white"
+        >
+          <h1 class="display-4">Welcome to Park And Go</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Occupied Parking Slots Section -->
+    <app-occupied-parking-slots></app-occupied-parking-slots>
+
+    <!-- Available Parking Slots Section -->
+    <app-available-parking-slots></app-available-parking-slots>
+
+    <!-- Temporary Parking Slots Section -->
+    <app-temporary-parking-slots></app-temporary-parking-slots>
+  </div>
+</div>
