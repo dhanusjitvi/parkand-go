@@ -1,32 +1,28 @@
-<!-- Your existing HTML structure -->
 <div class="container mt-4">
-  <h2 style="color: white;">Temporary-Parking-Slots</h2>
-  <div class="table-responsive">
-    <!-- Check if temporaryParkingSlots array is not empty -->
-    <div *ngIf="temporaryParkingSlots.length > 0; else noDataMessage">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Parking Slot Number</th>
-            <th>Name</th>
-            <th>Validity Start Date</th>
-            <th>Validity End Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Iterate over temporaryParkingSlots array -->
-          <tr *ngFor="let slot of temporaryParkingSlots">
-            <td>{{ slot.slotNumber }}</td>
-            <td>{{ slot.userName }}</td>
-            <td>{{ slot.startDate | date:'yyyy-MM-dd' }}</td>
-            <td>{{ slot.endDate | date:'yyyy-MM-dd' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- Display message when temporaryParkingSlots array is empty -->
-    <ng-template #noDataMessage>
-      <p style="color: white;">No one is in the temporary parking slots.</p>
-    </ng-template>
+  <h2 style="color: white;">Temporary Parking Slot Details</h2>
+  <!-- Check if temporaryParkingSlot is not null -->
+  <div *ngIf="temporaryParkingSlot; else noDataMessage">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Parking Slot Number</th>
+          <th>Name</th>
+          <th>Validity Start Date</th>
+          <th>Validity End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ temporaryParkingSlot.slotNumber }}</td>
+          <td>{{ temporaryParkingSlot.userName }}</td>
+          <td>{{ temporaryParkingSlot.startDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{ temporaryParkingSlot.endDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  <!-- Display message when temporaryParkingSlot is null -->
+  <ng-template #noDataMessage>
+    <p style="color: white;">No one is in the temporary parking slot.</p>
+  </ng-template>
 </div>

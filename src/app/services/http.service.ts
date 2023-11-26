@@ -10,7 +10,6 @@ const apiUrl = 'http://localhost:5000/'
 })
 export class HttpService {
 
-  
   constructor(private http: HttpClient) { }
 
   fetchOccupiedParkingSlots(): Observable<OccupiedParkingSlot[]> {
@@ -23,11 +22,15 @@ export class HttpService {
 
 
   fetchTemporaryParkingSlots(): Observable<TemporaryParkingSlot[]> {
-    return this.http.get<TemporaryParkingSlot[]>(`${apiUrl}getTemporaryUser`);
+    return this.http.get<TemporaryParkingSlot[]>(`${apiUrl}temporary-users`);
   }
 
 
   applyForLeave(data: any): Observable<any> {
     return this.http.post<any>(`${apiUrl}users-apply-onleave`, data);
+  }
+
+  bookParkingSlot(data: any): Observable<any> {
+    return this.http.post<any>(`${apiUrl}get-bookParkingSlot`, data);
   }
 }

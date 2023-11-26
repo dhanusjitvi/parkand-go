@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
-import { TemporaryParkingSlot } from 'src/app/interfaces/users';
+
+interface TemporaryParkingSlot {
+  userName: string;
+  slotNumber: string;
+  startDate: Date | string;
+  endDate: Date | string;
+}
 
 @Component({
   selector: 'app-temporary-parking-slots',
@@ -8,21 +14,33 @@ import { TemporaryParkingSlot } from 'src/app/interfaces/users';
   styleUrls: ['./temporary-parking-slots.component.css']
 })
 export class TemporaryParkingSlotsComponent implements OnInit {
-  temporaryParkingSlots: TemporaryParkingSlot[] = [];
+  temporaryParkingSlot: TemporaryParkingSlot | null = null;
 
   constructor(private httpService: HttpService) {}
 
   ngOnInit(): void {
-    this.fetchTemporaryParkingSlots();
+    console.log('ngOnInit called');
+    this.fetchTemporaryParkingSlot();
   }
 
-  fetchTemporaryParkingSlots(): void {
+  fetchTemporaryParkingSlot(): void {
     this.httpService.fetchTemporaryParkingSlots().subscribe(
-      (data: TemporaryParkingSlot[]) => {
-        this.temporaryParkingSlots = data;
+      (data: any) => {
+        if (data.userName) {
+          // If data.userName is truthy, it means there is a temporary parking slot
+          this.temporaryParkingSlot = {
+            userName: data.userName,
+            slotNumber: data.slotNumber,
+            startDate: data.startDate,
+            endDate: data.endDate
+          };
+        } else {
+          // If data.userName is falsy, it means there is no temporary parking slot
+          this.temporaryParkingSlot = null;
+        }
       },
       error => {
-        console.error('Error fetching temporary parking slots:', error);
+        console.error('Error fetching temporary parking slot:', error);
       }
     );
   }
